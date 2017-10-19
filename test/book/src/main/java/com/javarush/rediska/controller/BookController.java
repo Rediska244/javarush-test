@@ -76,7 +76,10 @@ public class BookController {
                              @RequestParam("searchAuthor") String searchAutor,
                              @RequestParam("searchYear") String searchYear,Model model) {
         int year = 0;
-        if(!searchYear.equals("") ) year = Integer.parseInt(searchYear);
+        if(!searchYear.equals("") )
+            try {
+                year = Integer.parseInt(searchYear);
+            } catch(NumberFormatException e){}
         List<Book> book =  this.bookService.searchBookByTitleAndAuthorAndYear(searchTitle, searchAutor, year);
         model.addAttribute("listBooks", book);
 
